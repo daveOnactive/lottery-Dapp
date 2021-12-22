@@ -2,6 +2,12 @@
 
 Simple decentralized lottery web application
 
+### `packages`
+- react
+- chakra-ui
+- web3
+- react-icons
+
 ## Available Scripts
 
 In the project directory, you can run:

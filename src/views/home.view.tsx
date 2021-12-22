@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { HeaderFeature } from '../features'
+import { HeaderFeature, HeroBannerFeature } from '../features'
 
 export const HomeView: FC = () => {
 
@@ -52,6 +52,7 @@ export const HomeView: FC = () => {
   return (
     <main>
       <HeaderFeature />
+      <HeroBannerFeature />
     </main>
   )
 }

@@ -1,0 +1,1 @@
+export { HeroBannerFeature } from './hero-banner.feature';

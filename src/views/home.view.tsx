@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { HeaderFeature } from '../features'
+
 export const HomeView: FC = () => {
 
   // const rows = {
@@ -49,7 +51,7 @@ export const HomeView: FC = () => {
 
   return (
     <main>
-
+      <HeaderFeature />
     </main>
   )
 }

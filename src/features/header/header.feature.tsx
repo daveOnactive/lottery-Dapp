@@ -7,7 +7,7 @@ export const HeaderFeature: FC = () => {
   const address = '0x0c2E38c13fa03b79b0D128Aa339788d4D0fee8CD';
 
   return (
-    <Box p='2'>
+    <Box p='4' pb='6'>
       <Flex justify="space-between">
         <Box />
         <LogoComponent width='60px' height='60px' src='https://o.remove.bg/downloads/0caec46b-3979-4b25-bd4e-437c17d6454c/Business__174_-removebg-preview.png' />

@@ -10,7 +10,7 @@ export const HeroBannerFeature: FC = () => {
   return (
     <Box>
       <Flex justify="space-between" align="center">
-        <Stack direction='row' spacing={4} p='2'>
+        <Stack direction='row' spacing={4} p='4'>
           <Button leftIcon={<Icon as={FaEthereum} w={5} h={5} />} colorScheme='teal' variant='outline'>
             Place bet
           </Button>

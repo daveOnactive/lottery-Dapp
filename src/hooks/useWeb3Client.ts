@@ -40,6 +40,15 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
     });
   }, [dispatch]);
 
+  const getContractBalance = useCallback(async () => {
+    const contractBalance = await contract.methods.getContractBalance().call() as string;
+    const convertedContractBalance = await web3?.utils?.fromWei(contractBalance, 'ether');
+    dispatch({
+      type: ActionTypes.SET_CONTRACT_BALANCE,
+      payload: convertedContractBalance,
+    })
+  }, [dispatch]);
+
   const getContractOwner = useCallback(async () => {
     contractOwnerAddress = await contract.methods.contractOwner().call();
 
@@ -130,6 +139,8 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
 
       await getContractOwner();
 
+      await getContractBalance();
+
       await getLotteryList();
 
       dispatch({
@@ -140,8 +151,17 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
         type: ActionTypes.SET_ADDRESS,
         payload: accounts[0]
       });
+    } else {
+      toast({
+        title: 'Wallet Connection Failed!',
+        description: `Please install MetaMask wallet from chrome extension to continue`,
+        status: 'error',
+        duration: 5000,
+        position: 'top',
+        isClosable: true,
+      })
     }
-  }, [dispatch, getBalance, getContractOwner, getLotteryList, provider]);
+  }, [dispatch, getBalance, getContractOwner, getLotteryList, provider, toast]);
 
 
   useEffect(() => {

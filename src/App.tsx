@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     toggleColorMode();
-  }, [toggleColorMode]);
+  }, []);
 
 
   if (isLoading) return (

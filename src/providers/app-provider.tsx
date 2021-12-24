@@ -9,6 +9,9 @@ export type InitialState = {
   connectWallet?: () => void;
   balance: string;
   isLoading: boolean;
+  contractOwner?: string;
+  playLottery?: () => void;
+  isSendingTransaction?: boolean;
 }
 
 export enum ActionTypes {
@@ -16,6 +19,11 @@ export enum ActionTypes {
   CONNECT_WALLET = 'connectWallet',
   SET_BALANCE = 'setBalance',
   DISCONNECT_WALLET = 'disconnectWallet',
+  SET_CONTRACT_OWNER = 'setContractOwner',
+  SET_ADMIN = 'setAdmin',
+  SEND_TRANSACTION_IN_PROGRESS = 'sendTransactionInProgress',
+  SEND_TRANSACTION_DONE = 'sendTransactionDone',
+
 }
 
 export type Actions = {
@@ -58,6 +66,26 @@ const reducer = (state: InitialState, action: Actions) => {
         ...state,
         balance: action.payload,
       }
+    case ActionTypes.SET_ADMIN:
+      return {
+        ...state,
+        isAdmin: true,
+      }
+    case ActionTypes.SET_CONTRACT_OWNER:
+      return {
+        ...state,
+        contractOwner: action.payload,
+      }
+    case ActionTypes.SEND_TRANSACTION_DONE:
+      return {
+        ...state,
+        isSendingTransaction: false,
+      }
+    case ActionTypes.SEND_TRANSACTION_IN_PROGRESS:
+      return {
+        ...state,
+        isSendingTransaction: true,
+      }
     default:
       return state;
   }
@@ -69,20 +97,21 @@ const initialState: InitialState = {
   isWalletConnected: false,
   balance: '0',
   isLoading: true,
+  isSendingTransaction: false,
 }
 
 export const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const { connectWallet, } = useWeb3Client({
+  const { connectWallet, playLottery } = useWeb3Client({
     dispatch
   });
 
   const clonedState = {
     ...state,
-    connectWallet
+    connectWallet,
+    playLottery
   }
-
 
   return (
     <AppContext.Provider value={{

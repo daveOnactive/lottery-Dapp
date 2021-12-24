@@ -11,6 +11,9 @@ export const HeroBannerFeature: FC = () => {
   const { state } = useContext(AppContext);
 
   const isWalletConnected = state?.isWalletConnected;
+  const isAdmin = state?.isAdmin;
+  const playLottery = state?.playLottery;
+  const isSendingTransaction = state?.isSendingTransaction;
 
   return (
     <Box>
@@ -19,15 +22,28 @@ export const HeroBannerFeature: FC = () => {
           {
             isWalletConnected && (
               <>
-                <Button leftIcon={<Icon as={FaEthereum} w={5} h={5} />} colorScheme='teal' variant='outline'>
+                <Button
+                  onClick={playLottery}
+                  leftIcon={<Icon as={FaEthereum} w={5} h={5} />}
+                  colorScheme='teal'
+                  variant='outline'
+                  isLoading={isSendingTransaction}
+                  loadingText='Sending Transaction'
+                >
                   Place bet
                 </Button>
-                <Button leftIcon={<Icon as={GiPodiumWinner} w={5} h={5} />} colorScheme='teal' variant='outline'>
-                  Randomly Pick winner
-                </Button>
-                <Button leftIcon={<Icon as={RiAdminFill} w={5} h={5} />} colorScheme='teal' variant='outline'>
-                  Change owner
-                </Button>
+                {
+                  isAdmin && (
+                    <>
+                      <Button leftIcon={<Icon as={GiPodiumWinner} w={5} h={5} />} colorScheme='teal' variant='outline'>
+                        Randomly Pick winner
+                      </Button>
+                      <Button leftIcon={<Icon as={RiAdminFill} w={5} h={5} />} colorScheme='teal' variant='outline'>
+                        Change owner
+                      </Button>
+                    </>
+                  )
+                }
               </>
             )
           }

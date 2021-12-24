@@ -1,5 +1,5 @@
 import { FC, useContext } from 'react';
-import { Flex, Box, Button, Stack, Icon, Alert, AlertIcon } from '@chakra-ui/react';
+import { Flex, Box, Button, Stack, Icon } from '@chakra-ui/react';
 import { RiAdminFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
 import { FaEthereum } from 'react-icons/fa';

@@ -18,9 +18,11 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
   const getBalance = useCallback(async (address: string) => {
     const balance = await web3?.eth?.getBalance(address);
 
+    const convertedBalance = await web3.utils.fromWei(balance, 'ether');
+
     dispatch({
       type: ActionTypes.SET_BALANCE,
-      payload: balance
+      payload: convertedBalance
     })
   }, [dispatch])
 

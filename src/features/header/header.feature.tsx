@@ -7,6 +7,9 @@ import { AppContext } from '../../providers';
 export const HeaderFeature: FC = () => {
 
   const { state } = useContext(AppContext);
+  const address = state?.address;
+  const isWalletConnected = state?.isWalletConnected;
+  const connectWallet = state?.connectWallet;
 
   return (
     <Box p='4' pb='6'>
@@ -14,11 +17,20 @@ export const HeaderFeature: FC = () => {
         <Box>
           <Alert status='warning' w='100%'>
             <AlertIcon />
-            <Text>This application is hosted on <Text fontWeight='bold' fontStyle='italic'>'ROPSTEN TEST NETWORK'</Text></Text>
+            This application is hosted on <Text fontWeight='bold' fontStyle='italic'>'ROPSTEN TEST NETWORK'</Text>
           </Alert>
         </Box>
-        <LogoComponent width='60px' height='60px' src='https://res.cloudinary.com/chidi6ix/image/upload/v1640310940/lottery-Dapp/Business__174_-removebg-preview_kbofqk.png' />
-        <ShowBalanceComponent balance={state?.balance} address={state?.address} isWalletConnected={state?.isWalletConnected} connectWallet={state?.connectWallet} />
+        <LogoComponent
+          width='60px'
+          height='60px'
+          src='https://res.cloudinary.com/chidi6ix/image/upload/v1640310940/lottery-Dapp/Business__174_-removebg-preview_kbofqk.png'
+        />
+        <ShowBalanceComponent
+          balance={state?.balance}
+          address={address}
+          isWalletConnected={isWalletConnected}
+          connectWallet={connectWallet}
+        />
       </Flex>
     </Box>
   )

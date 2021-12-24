@@ -1,4 +1,6 @@
 export type ShowBalanceComponentProps = {
-  balance: string;
-  address: string;
+  balance?: string;
+  address?: string;
+  isWalletConnected?: boolean;
+  connectWallet?: () => void;
 }

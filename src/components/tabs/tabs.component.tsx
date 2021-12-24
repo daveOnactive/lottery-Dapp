@@ -10,14 +10,14 @@ export const TabsComponent: FC<TabsComponentProps> = ({ tabs }) => {
       <TabList>
         {
           tabs.titles.map((title) => (
-            <Tab>{title}</Tab>
+            <Tab key={title}>{title}</Tab>
           ))
         }
       </TabList>
       <TabPanels>
         {
-          tabs.children.map((title) => (
-            <TabPanel>{title}</TabPanel>
+          tabs.children.map((element, index) => (
+            <TabPanel key={index}>{element}</TabPanel>
           ))
         }
       </TabPanels>

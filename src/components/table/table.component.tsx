@@ -16,13 +16,13 @@ export const TableComponent: FC<TableComponentProps> = ({ rows }) => {
       <Thead>
         <Tr>
           {rows.head.map(item => (
-            <Th>{item}</Th>
+            <Th key={item}>{item}</Th>
           ))}
         </Tr>
       </Thead>
       <Tbody>
-        {rows.body.map(item => (
-          <Tr>
+        {rows.body.map((item, index) => (
+          <Tr key={index}>
             {item}
           </Tr>
         ))}

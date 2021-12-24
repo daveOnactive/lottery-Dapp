@@ -1,9 +1,14 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useContext, useCallback } from 'react';
 import { Td, Box } from '@chakra-ui/react';
 
 import { TableComponent, TabsComponent } from '../../components';
+import { AppContext } from '../../providers';
 
 export const LotteryListFeature: FC = () => {
+
+  const { state } = useContext(AppContext);
+
+  const isWalletConnected = state?.isWalletConnected;
 
   const rows = useMemo(() => (
     {
@@ -41,17 +46,22 @@ export const LotteryListFeature: FC = () => {
         </>
       ]
     }
-  ), [])
+  ), []);
+
+  const renderCurrentGame = useCallback(() => {
+    if (isWalletConnected) return <TableComponent rows={rows} />
+    return 'Connect your wallet to view games'
+  }, [isWalletConnected, rows])
 
   const tabs = useMemo(() => (
     {
       titles: ['Current Game', 'Game History'],
       children: [
-        <TableComponent rows={rows} />,
+        renderCurrentGame(),
         <p>Coming soon</p>
       ],
     }
-  ), [rows]);
+  ), [renderCurrentGame]);
 
   return (
     <Box p='4'>

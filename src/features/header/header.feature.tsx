@@ -14,12 +14,7 @@ export const HeaderFeature: FC = () => {
   return (
     <Box p='4' pb='6'>
       <Flex justify="space-between">
-        <Box>
-          <Alert status='warning' w='100%'>
-            <AlertIcon />
-            This application is hosted on <Text fontWeight='bold' fontStyle='italic'>'ROPSTEN TEST NETWORK'</Text>
-          </Alert>
-        </Box>
+        <Box />
         <LogoComponent
           width='60px'
           height='60px'

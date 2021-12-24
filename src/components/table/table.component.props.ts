@@ -1,10 +1,11 @@
 import React from 'react'
 
-type Rows = {
+export type TableRows<T = any[]> = {
   head: string[];
-  body: React.ReactNode[];
+  body: (data?: T) => React.ReactNode[] | undefined;
 }
 
 export type TableComponentProps = {
-  rows: Rows
+  rows: TableRows,
+  data?: any[],
 }

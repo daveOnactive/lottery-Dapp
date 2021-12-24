@@ -1,0 +1,1 @@
+export { WalletNotConnectedComponent } from './wallet-not-connected';

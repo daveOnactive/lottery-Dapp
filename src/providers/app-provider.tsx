@@ -1,4 +1,4 @@
-import React, { FC, createContext, useReducer } from 'react';
+import React, { FC, createContext, useReducer, useEffect } from 'react';
 
 import { useWeb3Client } from '../hooks';
 
@@ -12,6 +12,7 @@ export type InitialState = {
   contractOwner?: string;
   playLottery?: () => void;
   isSendingTransaction?: boolean;
+  lotteryList: any[];
 }
 
 export enum ActionTypes {
@@ -23,7 +24,7 @@ export enum ActionTypes {
   SET_ADMIN = 'setAdmin',
   SEND_TRANSACTION_IN_PROGRESS = 'sendTransactionInProgress',
   SEND_TRANSACTION_DONE = 'sendTransactionDone',
-
+  SET_LOTTERY_LIST = 'setLotteryList',
 }
 
 export type Actions = {
@@ -86,6 +87,11 @@ const reducer = (state: InitialState, action: Actions) => {
         ...state,
         isSendingTransaction: true,
       }
+    case ActionTypes.SET_LOTTERY_LIST:
+      return {
+        ...state,
+        lotteryList: action.payload
+      }
     default:
       return state;
   }
@@ -98,6 +104,7 @@ const initialState: InitialState = {
   balance: '0',
   isLoading: true,
   isSendingTransaction: false,
+  lotteryList: [],
 }
 
 export const AppProvider: FC = ({ children }) => {

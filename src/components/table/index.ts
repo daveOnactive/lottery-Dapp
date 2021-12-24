@@ -1,2 +1,2 @@
 export { TableComponent } from './table.component';
-export type { TableComponentProps } from './table.component.props';
+export type { TableComponentProps, TableRows } from './table.component.props';

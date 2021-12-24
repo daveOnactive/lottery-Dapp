@@ -25,7 +25,7 @@ const DEFAULT_PLAY_LOTTERY_VOLUME = '0.01';
 export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> }) => {
   const provider = window.ethereum;
 
-  const toast = useToast()
+  const toast = useToast();
 
   const getBalance = useCallback(async (address: string) => {
     currentAddress = address;
@@ -54,6 +54,14 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
     });
   }, [dispatch]);
 
+  const getLotteryList = useCallback(async () => {
+    const players = await contract.methods.getAllCurrentPlayer().call() as string[];
+    dispatch({
+      type: ActionTypes.SET_LOTTERY_LIST,
+      payload: players,
+    });
+  }, [dispatch]);
+
   const playLottery = async () => {
     if (convertedBalance === DEFAULT_BALANCE) {
       toast({
@@ -78,6 +86,8 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
 
         await getBalance(currentAddress);
 
+        await getLotteryList();
+
         toast({
           title: 'Lottery Played!',
           description: `you have successfully Deposited ${DEFAULT_PLAY_LOTTERY_VOLUME}ETH`,
@@ -101,7 +111,7 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
         });
       }
     }
-  }
+  };
 
   const connectWallet = useCallback(async () => {
 
@@ -120,6 +130,8 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
 
       await getContractOwner();
 
+      await getLotteryList();
+
       dispatch({
         type: ActionTypes.CONNECT_WALLET
       });
@@ -129,7 +141,7 @@ export const useWeb3Client = ({ dispatch }: { dispatch: React.Dispatch<Actions> 
         payload: accounts[0]
       });
     }
-  }, [dispatch, getBalance, getContractOwner, provider]);
+  }, [dispatch, getBalance, getContractOwner, getLotteryList, provider]);
 
 
   useEffect(() => {

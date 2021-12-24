@@ -9,7 +9,7 @@ import {
 
 import { TableComponentProps } from '.'
 
-export const TableComponent: FC<TableComponentProps> = ({ rows }) => {
+export const TableComponent: FC<TableComponentProps> = ({ rows, data }) => {
 
   return (
     <Table variant='simple'>
@@ -21,7 +21,7 @@ export const TableComponent: FC<TableComponentProps> = ({ rows }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {rows.body.map((item, index) => (
+        {rows.body(data)?.map((item, index) => (
           <Tr key={index}>
             {item}
           </Tr>
